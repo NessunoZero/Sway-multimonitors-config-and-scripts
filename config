@@ -1,0 +1,148 @@
+#set a key for some keybindings on main's screen workspaces
+set $main_key Mod4
+#set a key for some keybindings on secondary screen workspaces
+set $external_key Control
+#set a key to press with main or external key, to move container to workspace
+set $modifier_key Shift
+#set mod key
+set $mod Mod4
+#set laptop screen
+set $laptop eDP-1
+#set external screen
+set $external HDMI-A-1
+#set path to script's folder on your pc
+set $path_scripts ~/scripts
+
+#set on close lid option
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
+#Using sway idle to start swaylock and put off screens
+set $lock swayidle -w \
+    timeout 1 'swaylock -e -f -c 000000 -i ~/.config/wall.png -t' \
+    timeout 2 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"; pkill -nx swayidle'
+
+#Using sway idle to start swaylock without put off screen
+set $lock_suspend swayidle -w\
+    timeout 1 'swaylock -e -f -c 000000 -i ~/.config/wall.png -t' \
+    resume 'pkill -nx swayidle'
+set $lock_sup swaylock -e -f -c 000000 -t -F
+
+#keybind 
+#   Just lock screen and put off screens
+    bindsym $mod+l exec $lock_sup
+#   Just lock screens and suspend laptop
+    bindsym $mod+Shift+l exec $lock_sup & exec systemctl suspend
+
+#
+#shortcut for rename workspace
+#
+    bindsym $main_key+i exec $path_scripts/rename_workspace.sh $path_scripts
+
+#
+# Workspaces:
+#
+#   Switch to workspace
+
+#   Firsts ten workspaces
+    bindsym $main_key+1 workspace Number 1
+    bindsym $main_key+2 workspace Number 2
+    bindsym $main_key+3 workspace Number 3
+    bindsym $main_key+4 workspace Number 4
+    bindsym $main_key+5 workspace Number 5
+    bindsym $main_key+6 workspace Number 6
+    bindsym $main_key+7 workspace Number 7
+    bindsym $main_key+8 workspace Number 8
+    bindsym $main_key+9 workspace Number 9
+    bindsym $main_key+0 workspace Number 10
+    
+#   Others ten workspaces
+    bindsym $external_key+1 workspace Number 01
+    bindsym $external_key+2 workspace Number 02
+    bindsym $external_key+3 workspace Number 03
+    bindsym $external_key+4 workspace Number 04
+    bindsym $external_key+5 workspace Number 05
+    bindsym $external_key+6 workspace Number 06
+    bindsym $external_key+7 workspace Number 07
+    bindsym $external_key+8 workspace Number 08
+    bindsym $external_key+9 workspace Number 09
+    bindsym $external_key+0 workspace Number 010
+    
+#   Move focused container to workpace
+
+#   To Firsts ten workspaces   
+    bindsym $main_key+$modifier_key+1 move container to workspace Number 1
+    bindsym $main_key+$modifier_key+2 move container to workspace Number 2
+    bindsym $main_key+$modifier_key+3 move container to workspace Number 3
+    bindsym $main_key+$modifier_key+4 move container to workspace Number 4
+    bindsym $main_key+$modifier_key+5 move container to workspace Number 5
+    bindsym $main_key+$modifier_key+6 move container to workspace Number 6
+    bindsym $main_key+$modifier_key+7 move container to workspace Number 7
+    bindsym $main_key+$modifier_key+8 move container to workspace Number 8
+    bindsym $main_key+$modifier_key+9 move container to workspace Number 9
+    bindsym $main_key+$modifier_key+0 move container to workspace Number 10
+
+#   To others ten workspaces    
+    bindsym $external_key+$modifier_key+1 move container to workspace Number 01
+    bindsym $external_key+$modifier_key+2 move container to workspace Number 02
+    bindsym $external_key+$modifier_key+3 move container to workspace Number 03
+    bindsym $external_key+$modifier_key+4 move container to workspace Number 04
+    bindsym $external_key+$modifier_key+5 move container to workspace Number 05
+    bindsym $external_key+$modifier_key+6 move container to workspace Number 06
+    bindsym $external_key+$modifier_key+7 move container to workspace Number 07
+    bindsym $external_key+$modifier_key+8 move container to workspace Number 08
+    bindsym $external_key+$modifier_key+9 move container to workspace Number 09
+    bindsym $external_key+$modifier_key+0 move container to workspace Number 010
+    
+#
+# Workspace and screen
+#
+
+#   on laptop monitor
+    workspace 1 output $laptop
+    workspace 2 output $laptop
+    workspace 3 output $laptop
+    workspace 4 output $laptop
+    workspace 5 output $laptop
+    workspace 6 output $laptop
+    workspace 7 output $laptop
+    workspace 8 output $laptop
+    workspace 9 output $laptop
+    workspace 10 output $laptop
+    
+#   on external monitor
+    workspace 01 output $external
+    workspace 02 output $external
+    workspace 03 output $external
+    workspace 04 output $external
+    workspace 05 output $external
+    workspace 06 output $external
+    workspace 07 output $external
+    workspace 08 output $external
+    workspace 09 output $external
+    workspace 010 output $external
+
+#Switch workspaces beetween monitor
+
+    bindsym $external_key+$main_key+1 exec $path_scripts/move_workspace.sh $path_scripts 1
+    bindsym $external_key+$main_key+2 exec $path_scripts/move_workspace.sh $path_scripts 2
+    bindsym $external_key+$main_key+3 exec $path_scripts/move_workspace.sh $path_scripts 3
+    bindsym $external_key+$main_key+4 exec $path_scripts/move_workspace.sh $path_scripts 4
+    bindsym $external_key+$main_key+5 exec $path_scripts/move_workspace.sh $path_scripts 5
+    bindsym $external_key+$main_key+6 exec $path_scripts/move_workspace.sh $path_scripts 6
+    bindsym $external_key+$main_key+7 exec $path_scripts/move_workspace.sh $path_scripts 7
+    bindsym $external_key+$main_key+8 exec $path_scripts/move_workspace.sh $path_scripts 8
+    bindsym $external_key+$main_key+9 exec $path_scripts/move_workspace.sh $path_scripts 9
+    bindsym $external_key+$main_key+0 exec $path_scripts/move_workspace.sh $path_scripts 10
+    
+#On off monitor
+
+#   put off laptop monitor
+    bindsym --locked $external_key+$main_key+Down output $laptop disable 
+#   put on laptop monitor
+    bindsym --locked $external_key+$main_key+Up output $laptop enable
+#   put off external monitor
+    bindsym --locked $external_key+$main_key+Left output $external disable
+#   put on external monitor
+    bindsym --locked $external_key+$main_key+Right output $external enable

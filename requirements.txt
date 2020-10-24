@@ -1,0 +1,15 @@
+Must:   swaywm
+Needed for script that rename/move workspaces:  python3,    i3ipc-python3
+Needed for script that rename a workspace:  zenity
+Needed for bonus stuff to how lock or lock and suspend pc:  swaylock,   swayidle
+Needed to show eventually error on move_workspace:  notify-send
+
+All:
+
+swaywm
+python3
+i3ipc-python3
+zenity
+swaylock
+swayidle
+notify-send
